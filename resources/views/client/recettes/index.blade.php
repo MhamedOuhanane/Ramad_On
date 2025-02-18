@@ -1,30 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recettes Ramadan 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-purple-900 text-white">
-    <!-- Navigation (repris du template principal) -->
-    <nav class="fixed w-full z-50 bg-opacity-90 bg-purple-900">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-xl font-bold">
-                    <span class="text-yellow-400">◆</span> RAMADAN
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="hover:text-yellow-400">Accueil</a>
-                    <a href="#" class="text-yellow-400">Recettes</a>
-                    <a href="#" class="hover:text-yellow-400">Ressources</a>
-                    <a href="#" class="hover:text-yellow-400">Communauté</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
+<x-master >
     <!-- En-tête de la page -->
     <div class="pt-24 pb-12">
         <div class="container mx-auto px-6">
@@ -205,5 +179,4 @@
         // Affichage initial
         displayRecipes();
     </script>
-</body>
-</html>
+</x-master>

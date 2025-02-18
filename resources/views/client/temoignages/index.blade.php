@@ -1,3 +1,4 @@
+<x-master >
 <!-- En-tête de la page -->
     <div class="pt-24 pb-12">
         <div class="container mx-auto px-6">
@@ -255,5 +256,4 @@
         // Affichage initial
         displayTestimonials();
     </script>
-</body>
-</html>
+</x-master>

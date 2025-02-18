@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'fist_name',
+        'last_name',
         'email',
         'password',
+        'photo',
+        'role_id',
     ];
 
     /**
@@ -44,5 +47,9 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function Role() {
+        return $this->belongsTo(Role::class);
     }
 }
