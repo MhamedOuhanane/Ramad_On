@@ -1,20 +1,3 @@
-
-
-<!-- Mobile Menu -->
-<div id="mobileMenu" class="fixed inset-0 bg-purple-900 z-40 hidden">
-    <div class="container mx-auto px-6 py-20">
-        <div class="flex flex-col space-y-6 text-center">
-            <a href="#home" class="text-xl hover:text-yellow-400 transition">Accueil</a>
-            <a href="#horaires" class="text-xl hover:text-yellow-400 transition">Horaires</a>
-            <a href="#ressources" class="text-xl hover:text-yellow-400 transition">Ressources</a>
-            <a href="#communaute" class="text-xl hover:text-yellow-400 transition">Communauté</a>
-            <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">
-                Connexion
-            </button>
-        </div>
-    </div>
-</div>
-
 <!-- Hero Section -->
 <section id="home" class="mosque-bg min-h-screen flex items-center relative overflow-hidden">
     <!-- Stars and Moon -->
