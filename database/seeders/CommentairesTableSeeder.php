@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Commentaire;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
-class UsersTableSeeder extends Seeder
+class CommentairesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // User::factory(20)->create();
+        Commentaire::factory(100)->create();
     }
 }

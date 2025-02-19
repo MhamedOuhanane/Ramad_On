@@ -2,18 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Categorie;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
-class UsersTableSeeder extends Seeder
+class CategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // User::factory(20)->create();
+        Categorie::factory(10)->create();
     }
 }
