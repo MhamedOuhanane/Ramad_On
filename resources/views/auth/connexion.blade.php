@@ -68,7 +68,7 @@
 
                         <p class="text-center text-sm">
                             Pas encore de compte ? 
-                            <a href="#" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('auth.inscription') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Inscrivez-vous
                             </a>
                         </p>

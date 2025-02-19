@@ -18,7 +18,8 @@
                     <h2 class="text-2xl font-bold text-center text-white mb-8">Créer un compte</h2>
 
                     <!-- Register Form -->
-                    <form id="registerForm" class="space-y-6">
+                    <form id="registerForm" action="{{route('auth.inscription.store')}}" method="POST" class="space-y-6">
+                        @csrf
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Prénom</label>
@@ -29,6 +30,7 @@
                                     <input 
                                         type="text" 
                                         required 
+                                        name="first_name"
                                         class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                         placeholder="Prénom"
                                     >
@@ -43,6 +45,7 @@
                                     <input 
                                         type="text" 
                                         required 
+                                        name="last_name"
                                         class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                         placeholder="Nom"
                                     >
@@ -59,6 +62,7 @@
                                 <input 
                                     type="email" 
                                     required 
+                                    name="email"
                                     class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="votre@email.com"
                                 >
@@ -74,6 +78,7 @@
                                 <input 
                                     type="password" 
                                     required 
+                                    name="password"
                                     class="w-full pl-10 pr-12 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="••••••••"
                                 >
@@ -96,6 +101,7 @@
                                 <input 
                                     type="password" 
                                     required 
+                                    name="password_confirmation"
                                     class="w-full pl-10 pr-12 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="••••••••"
                                 >
@@ -130,7 +136,7 @@
 
                         <p class="text-center text-sm">
                             Déjà inscrit ? 
-                            <a href="#" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('auth.connexion') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Connectez-vous
                             </a>
                         </p>
