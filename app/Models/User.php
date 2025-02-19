@@ -24,6 +24,21 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function Recettes()
+    {
+        return $this->hasMany(Recette::class);
+    }
+
+    public function Temoignages()
+    {
+        return $this->hasMany(Temoignage::class);
+    }
+
+    public function Commentaires()
+    {
+        return $this->hasMany(Commentaire::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

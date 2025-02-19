@@ -21,16 +21,24 @@
                     </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="hover:text-yellow-400 transition">Accueil</a>
-                    <a href="#horaires" class="hover:text-yellow-400 transition">Horaires</a>
-                    <a href="#ressources" class="hover:text-yellow-400 transition">Ressources</a>
-                    <button id="loginBtn" class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">
-                        Connexion
-                    </button>
+                    <a href="{{ route('home') }}" class="text-xl hover:text-yellow-400 transition">Home</a>
+                    <a href="{{ route('recettes') }}" class="text-xl hover:text-yellow-400 transition">Recettes</a>
+                    <a href="{{ route('temoignages') }}" class="text-xl hover:text-yellow-400 transition">Temoignages</a>
+                    @guest
+                        <a href="{{ route('login') }}">
+                            <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">
+                                Connexion
+                            </button>
+                        </a>
+                    @endguest
+                    @auth
+                        <a href="{{ route('logout') }}">
+                            <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">
+                                Déconnexion
+                            </button>
+                        </a>
+                    @endauth
                 </div>
-                <button class="md:hidden text-white" id="menuBtn">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
             </div>
         </div>
     </nav>
@@ -39,10 +47,9 @@
     <div id="mobileMenu" class="fixed inset-0 bg-purple-900 z-40 hidden">
         <div class="container mx-auto px-6 py-20">
             <div class="flex flex-col space-y-6 text-center">
-                <a href="{{ route('home') }}" class="text-xl hover:text-yellow-400 transition">Accueil</a>
-                <a href="#abouts" class="text-xl hover:text-yellow-400 transition">Horaires</a>
-                <a href="#ressources" class="text-xl hover:text-yellow-400 transition">Ressources</a>
-                <a href="#communaute" class="text-xl hover:text-yellow-400 transition">Communauté</a>
+                <a href="{{ route('home') }}" class="text-xl hover:text-yellow-400 transition">Home</a>
+                <a href="{{ route('recettes') }}" class="text-xl hover:text-yellow-400 transition">Recettes</a>
+                <a href="{{ route('temoignages') }}" class="text-xl hover:text-yellow-400 transition">Temoignages</a>
                 @guest
                     <a href="{{ route('login') }}">
                         <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">

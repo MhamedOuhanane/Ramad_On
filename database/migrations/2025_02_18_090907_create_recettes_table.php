@@ -16,9 +16,7 @@ return new class extends Migration
             $table->string('titre');
             $table->string('description');
             $table->string('photo');
-            $table->unsignedBigInteger('utilisateur_id');
             $table->unsignedBigInteger('categorie_id');
-            $table->foreign('utilisateur_id')->references('id')->on('utilisateurs')->onDelete('cascade');
             $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
