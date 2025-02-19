@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Ramadan 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .mosque-decoration {
-            clip-path: polygon(0 0, 100% 0, 100% 70%, 85% 70%, 85% 100%, 70% 70%, 55% 70%, 55% 100%, 40% 70%, 25% 70%, 25% 100%, 15% 70%, 0 70%);
-        }
-        .auth-bg {
-            background: linear-gradient(135deg, #4B0082 0%, #663399 100%);
-        }
-        .star {
-            animation: twinkle 1.5s infinite alternate;
-        }
-        @keyframes twinkle {
-            from { opacity: 0.4; }
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body class="min-h-screen auth-bg text-white">
+<x-authentifier >
     <!-- Stars Background -->
     <div class="fixed inset-0 pointer-events-none">
         <div class="star absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-200 rounded-full"></div>
@@ -92,7 +68,7 @@
 
                         <p class="text-center text-sm">
                             Pas encore de compte ? 
-                            <a href="#" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('auth.register') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Inscrivez-vous
                             </a>
                         </p>
@@ -127,5 +103,4 @@
             console.log('Tentative de connexion avec:', { email, password });
         });
     </script>
-</body>
-</html>
+</x-authentifier>

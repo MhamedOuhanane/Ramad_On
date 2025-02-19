@@ -1,28 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Ramadan 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        .mosque-decoration {
-            clip-path: polygon(0 0, 100% 0, 100% 70%, 85% 70%, 85% 100%, 70% 70%, 55% 70%, 55% 100%, 40% 70%, 25% 70%, 25% 100%, 15% 70%, 0 70%);
-        }
-        .auth-bg {
-            background: linear-gradient(135deg, #4B0082 0%, #663399 100%);
-        }
-        .star {
-            animation: twinkle 1.5s infinite alternate;
-        }
-        @keyframes twinkle {
-            from { opacity: 0.4; }
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body class="min-h-screen auth-bg text-white">
+<x-authentifier >
     <!-- Stars Background -->
     <div class="fixed inset-0 pointer-events-none">
         <div class="star absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-200 rounded-full"></div>
@@ -42,7 +18,8 @@
                     <h2 class="text-2xl font-bold text-center text-white mb-8">Créer un compte</h2>
 
                     <!-- Register Form -->
-                    <form id="registerForm" class="space-y-6">
+                    <form id="registerForm" action="{{route('auth.register.store')}}" method="POST" class="space-y-6">
+                        @csrf
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2">Prénom</label>
@@ -53,6 +30,7 @@
                                     <input 
                                         type="text" 
                                         required 
+                                        name="first_name"
                                         class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                         placeholder="Prénom"
                                     >
@@ -67,6 +45,7 @@
                                     <input 
                                         type="text" 
                                         required 
+                                        name="last_name"
                                         class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                         placeholder="Nom"
                                     >
@@ -83,6 +62,7 @@
                                 <input 
                                     type="email" 
                                     required 
+                                    name="email"
                                     class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="votre@email.com"
                                 >
@@ -98,6 +78,7 @@
                                 <input 
                                     type="password" 
                                     required 
+                                    name="password"
                                     class="w-full pl-10 pr-12 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="••••••••"
                                 >
@@ -120,6 +101,7 @@
                                 <input 
                                     type="password" 
                                     required 
+                                    name="password_confirmation"
                                     class="w-full pl-10 pr-12 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="••••••••"
                                 >
@@ -154,7 +136,7 @@
 
                         <p class="text-center text-sm">
                             Déjà inscrit ? 
-                            <a href="#" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('auth.login') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Connectez-vous
                             </a>
                         </p>
@@ -169,7 +151,7 @@
             const input = button.parentElement.querySelector('input');
             const icon = button.querySelector('i');
             
-            if (input.type === 'password') {
+            if (input.type == 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye');
                 icon.classList.add('fa-eye-slash');
@@ -198,9 +180,7 @@
                 password: passwords[0].value
             };
             
-            console.log('Données d\'inscription:', formData);
-            // Ici, ajoutez la logique d'inscription
+            registerForm.submit();
         });
     </script>
-</body>
-</html>
+</x-authentifier>

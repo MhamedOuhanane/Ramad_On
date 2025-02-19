@@ -1,79 +1,103 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recettes Ramadan 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-purple-900 text-white">
-    <!-- Navigation (repris du template principal) -->
-    <nav class="fixed w-full z-50 bg-opacity-90 bg-purple-900">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="text-xl font-bold">
-                    <span class="text-yellow-400">◆</span> RAMADAN
-                </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="hover:text-yellow-400">Accueil</a>
-                    <a href="#" class="text-yellow-400">Recettes</a>
-                    <a href="#" class="hover:text-yellow-400">Ressources</a>
-                    <a href="#" class="hover:text-yellow-400">Communauté</a>
-                </div>
-            </div>
+<x-master >
+    <div class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen relative overflow-hidden">
+        <!-- Éléments décoratifs (étoiles) -->
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-yellow-200 rounded-full animate-pulse"></div>
+            <div class="absolute top-1/3 right-1/3 w-2 h-2 bg-yellow-200 rounded-full animate-pulse delay-300"></div>
+            <div class="absolute top-1/2 left-1/2 w-2 h-2 bg-yellow-200 rounded-full animate-pulse delay-700"></div>
+            <div class="absolute top-20 right-20 w-16 h-16 bg-yellow-200 rounded-full opacity-90"></div>
         </div>
-    </nav>
-
-    <!-- En-tête de la page -->
-    <div class="pt-24 pb-12">
-        <div class="container mx-auto px-6">
-            <h1 class="text-4xl font-bold mb-6">Recettes pour le Ramadan</h1>
-            
-            <!-- Barre de recherche et filtres -->
-            <div class="flex flex-col md:flex-row gap-4 mb-8">
-                <div class="relative flex-1">
-                    <input 
-                        type="text" 
-                        id="searchInput"
-                        placeholder="Rechercher une recette..." 
-                        class="w-full pl-10 pr-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-                    >
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                        <i class="fas fa-search text-purple-400"></i>
-                    </span>
+    
+        <!-- Contenu principal -->
+        <div class="relative z-10">
+            <!-- En-tête de la page -->
+            <div class="pt-24 pb-12">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h1 class="text-5xl font-bold mb-6">Recettes pour le Ramadan</h1>
+                        <p class="text-purple-200 max-w-2xl mx-auto">
+                            Découvrez une sélection de délicieuses recettes pour le Suhoor et l'Iftar
+                        </p>
+                    </div>
+    
+                    <!-- Barre de recherche et filtres -->
+                    <div class="flex flex-col md:flex-row gap-4 mb-8">
+                        <div class="relative flex-1">
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Rechercher une recette..." 
+                                class="w-full pl-10 pr-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
+                            >
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                                <i class="fas fa-search text-purple-400"></i>
+                            </span>
+                        </div>
+                        <div class="flex gap-4">
+                            <select 
+                                id="categoryFilter"
+                                class="px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
+                            >
+                                <option value="all">Toutes les catégories</option>
+                                <option value="entrée">Entrées</option>
+                                <option value="soupe">Soupes</option>
+                                <option value="plat">Plats principaux</option>
+                                <option value="dessert">Desserts</option>
+                                <option value="boisson">Boissons</option>
+                            </select>
+                            <select 
+                                id="mealFilter"
+                                class="px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
+                            >
+                                <option value="all">Tous les repas</option>
+                                <option value="suhoor">Suhoor</option>
+                                <option value="iftar">Iftar</option>
+                            </select>
+                        </div>
+                    </div>
+    
+                    <!-- Grille des recettes -->
+                    <div id="recipesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Exemple de carte de recette -->
+                        <div class="bg-purple-900 bg-opacity-90 rounded-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2 backdrop-blur">
+                            <div class="relative h-48">
+                                <img src="/api/placeholder/400/320" alt="Recette" class="w-full h-full object-cover" />
+                                <div class="absolute top-2 right-2">
+                                    <span class="bg-yellow-400 text-purple-900 px-3 py-1 rounded-full text-sm font-bold">
+                                        Iftar
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">Harira Marocaine</h3>
+                                <p class="text-purple-200 mb-4">Une délicieuse soupe traditionnelle pour l'iftar...</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-yellow-400">Soupes</span>
+                                    <div class="flex items-center text-purple-200">
+                                        <i class="fas fa-clock mr-2"></i>
+                                        <span>45 min</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-12 space-x-2">
+                        <button id="prevPage" class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div id="pageNumbers" class="flex space-x-2">
+                            <!-- Les numéros de page seront injectés ici -->
+                            <button class="px-4 py-2 bg-yellow-400 text-purple-900 rounded-lg font-bold">1</button>
+                            <button class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">2</button>
+                            <button class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">3</button>
+                        </div>
+                        <button id="nextPage" class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex gap-4">
-                    <select 
-                        id="categoryFilter"
-                        class="px-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
-                    >
-                        <option value="all">Toutes les catégories</option>
-                        <option value="entrée">Entrées</option>
-                        <option value="soupe">Soupes</option>
-                        <option value="plat">Plats principaux</option>
-                        <option value="dessert">Desserts</option>
-                        <option value="boisson">Boissons</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- Grille des recettes -->
-            <div id="recipesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Les recettes seront injectées ici via JavaScript -->
-            </div>
-
-            <!-- Pagination -->
-            <div class="flex justify-center mt-12 space-x-2">
-                <button id="prevPage" class="px-4 py-2 bg-purple-800 rounded-lg hover:bg-purple-700">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <div id="pageNumbers" class="flex space-x-2">
-                    <!-- Les numéros de page seront injectés ici -->
-                </div>
-                <button id="nextPage" class="px-4 py-2 bg-purple-800 rounded-lg hover:bg-purple-700">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
         </div>
     </div>
@@ -205,5 +229,4 @@
         // Affichage initial
         displayRecipes();
     </script>
-</body>
-</html>
+</x-master>

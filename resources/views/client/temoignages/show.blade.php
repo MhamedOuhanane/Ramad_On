@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails du Témoignage - Ramadan 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-purple-900">
+<x-master >
     <!-- Contenu principal -->
-    <div class="container mx-auto px-4 py-8">
+    <div class="container mx-auto pt-24 pb-12">
         <div class="bg-purple-800 rounded-lg shadow-xl overflow-hidden text-white">
             <!-- En-tête de l'article -->
             <div class="p-6 border-b border-purple-700">
@@ -127,5 +118,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+</x-master>
