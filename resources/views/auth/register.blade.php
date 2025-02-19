@@ -18,7 +18,7 @@
                     <h2 class="text-2xl font-bold text-center text-white mb-8">Créer un compte</h2>
 
                     <!-- Register Form -->
-                    <form id="registerForm" action="{{route('auth.inscription.store')}}" method="POST" class="space-y-6">
+                    <form id="registerForm" action="{{route('auth.register.store')}}" method="POST" class="space-y-6">
                         @csrf
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -136,7 +136,7 @@
 
                         <p class="text-center text-sm">
                             Déjà inscrit ? 
-                            <a href="{{ route('auth.connexion') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('auth.login') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Connectez-vous
                             </a>
                         </p>
@@ -151,7 +151,7 @@
             const input = button.parentElement.querySelector('input');
             const icon = button.querySelector('i');
             
-            if (input.type === 'password') {
+            if (input.type == 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye');
                 icon.classList.add('fa-eye-slash');
@@ -180,8 +180,7 @@
                 password: passwords[0].value
             };
             
-            console.log('Données d\'inscription:', formData);
-            // Ici, ajoutez la logique d'inscription
+            registerForm.submit();
         });
     </script>
 </x-authentifier>

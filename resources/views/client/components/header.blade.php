@@ -43,9 +43,11 @@
                 <a href="#horaires" class="text-xl hover:text-yellow-400 transition">Horaires</a>
                 <a href="#ressources" class="text-xl hover:text-yellow-400 transition">Ressources</a>
                 <a href="#communaute" class="text-xl hover:text-yellow-400 transition">Communauté</a>
-                <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">
-                    Connexion
-                </button>
+                <a href="{{ route('auth.login') }}">
+                    <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition">
+                        Connexion
+                    </button>
+                </a>
             </div>
         </div>
     </div>

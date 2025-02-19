@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('photo');
+            $table->dropColumn('role_id');
         });
     }
 
