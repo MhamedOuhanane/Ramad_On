@@ -18,7 +18,8 @@
                     <h2 class="text-2xl font-bold text-center text-white mb-8">Connexion</h2>
 
                     <!-- Login Form -->
-                    <form id="loginForm" class="space-y-6">
+                    <form id="loginForm" action="{{ route('login.store') }}" method="POST" class="space-y-6">
+                        @csrf
                         <div>
                             <label class="block text-sm font-medium mb-2">Email</label>
                             <div class="relative">
@@ -28,6 +29,7 @@
                                 <input 
                                     type="email" 
                                     required 
+                                    name="email"
                                     class="w-full pl-10 pr-4 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="votre@email.com"
                                 >
@@ -43,6 +45,7 @@
                                 <input 
                                     type="password" 
                                     required 
+                                    name="password"
                                     class="w-full pl-10 pr-12 py-3 bg-purple-900 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none" 
                                     placeholder="••••••••"
                                 >
@@ -68,7 +71,7 @@
 
                         <p class="text-center text-sm">
                             Pas encore de compte ? 
-                            <a href="{{ route('auth.register') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('register') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Inscrivez-vous
                             </a>
                         </p>
@@ -98,9 +101,8 @@
             e.preventDefault();
             const email = this.querySelector('input[type="email"]').value;
             const password = this.querySelector('input[type="password"]').value;
+            loginForm.submit();
             
-            // Ici, vous pouvez ajouter la logique de connexion
-            console.log('Tentative de connexion avec:', { email, password });
         });
     </script>
 </x-authentifier>
