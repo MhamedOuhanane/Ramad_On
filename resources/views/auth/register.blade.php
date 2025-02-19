@@ -18,7 +18,7 @@
                     <h2 class="text-2xl font-bold text-center text-white mb-8">Créer un compte</h2>
 
                     <!-- Register Form -->
-                    <form id="registerForm" action="{{route('auth.register.store')}}" method="POST" class="space-y-6">
+                    <form id="registerForm" action="{{route('register.store')}}" method="POST" class="space-y-6">
                         @csrf
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -136,7 +136,7 @@
 
                         <p class="text-center text-sm">
                             Déjà inscrit ? 
-                            <a href="{{ route('auth.login') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
+                            <a href="{{ route('login') }}" class="text-yellow-400 hover:text-yellow-300 font-medium">
                                 Connectez-vous
                             </a>
                         </p>

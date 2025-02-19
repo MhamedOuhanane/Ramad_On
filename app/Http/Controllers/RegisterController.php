@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -21,13 +22,18 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        $user = User::create([
-            'first_name' => $validated['first_name'],
-            'last_name' => $validated['last_name'],
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
-        ]);
-        
-        return redirect()->route('auth.login')->with('success', 'Utilisateur créé avec succès');
+        try {
+            $user = User::create([
+                'first_name' => $validated['first_name'],
+                'last_name' => $validated['last_name'],
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
+            ]);
+    
+            return redirect()->route('login')->with('success', 'Utilisateur créé avec succès');
+            
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => 'Une erreur est survenue, veuillez réessayer plus tard.'])->withInput();
+        }
     }
 }
