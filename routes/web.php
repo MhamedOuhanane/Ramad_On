@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -26,15 +27,5 @@ Route::middleware('auth')->group(function() {
     Route::post('/temoignages/search', [TemoignageController::class, 'search'])->name('temoignages.search');
     Route::get('/temoignages/{id}', [TemoignageController::class, 'show'])->name('temoignages.show');
 
-    // Route::get('/temoignages/{id}', function() {
-    //     return view('client/recettes/index');
-    // });
-    
-    // Route::get('/temoignages', function() {
-    //     return view('client/temoignages/index');
-    // });
-    
-    // Route::get('/temoignages/{id}', function() {
-    //     return view('client/temoignages/show');
-    // });
+    Route::post('/temoignages/{id}', [CommentaireController::class, 'store'])->name('Commentaire');
 });

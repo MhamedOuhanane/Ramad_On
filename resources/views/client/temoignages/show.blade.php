@@ -39,7 +39,8 @@
                 <h2 class="text-xl font-semibold text-yellow-400 mb-6">Commentaires</h2>
                 
                 <!-- Formulaire de commentaire -->
-                <div class="mb-8">
+                <form action="{{ route('Commentaire', ['id' => $temoignage->id]) }}" method="POST" class="mb-8">
+                    @csrf
                     <div class="flex space-x-4">
                         <div class="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center">
                             <i class="fas fa-user text-purple-900"></i>
@@ -48,14 +49,15 @@
                             <textarea 
                                 class="w-full px-4 py-2 rounded-lg bg-purple-600 border border-purple-500 text-white placeholder-purple-300 focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                                 placeholder="Ajouter un commentaire..."
+                                name="commentaire"
                                 rows="3"
                             ></textarea>
-                            <button class="mt-2 px-6 py-2 bg-yellow-400 text-purple-900 rounded-lg hover:bg-yellow-300 transition font-semibold">
+                            <button type="submit" class="mt-2 px-6 py-2 bg-yellow-400 text-purple-900 rounded-lg hover:bg-yellow-300 transition font-semibold">
                                 Commenter
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Liste des commentaires -->
                 <div class="space-y-6">
