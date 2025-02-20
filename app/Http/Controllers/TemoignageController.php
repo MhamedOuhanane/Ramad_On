@@ -9,10 +9,19 @@ use Illuminate\Http\Request;
 
 class TemoignageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $temoignages = Categorie::find(1)->Recettes::pagination();
-        $categories = Categorie::all();
+        $temoignages = Temoignage::with('user')->withCount('Commentaires')->get();
+        
+        // if ($request->has('search') && $request->search != '') {
+        //     $searchTerm = $request->search;
+
+        //     $temoignages->where(function($query) use ($searchTerm){
+        //         $query->where('titre' , 'Ilike', )
+        //     });
+        // }
+
+
         return view('client.temoignages.index', compact('temoignages'));
     }
 

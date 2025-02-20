@@ -44,29 +44,37 @@
                                 <i class="fas fa-search text-purple-400"></i>
                             </span>
                         </div>
-                        <select 
-                            id="categoryFilter"
-                            class="px-4 py-3 bg-purple-900 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
-                        >
-                            <option value="all">Tous les sujets</option>
-                            <option value="spiritualité">Spiritualité</option>
-                            <option value="communauté">Vie communautaire</option>
-                            <option value="bienfaits">Bienfaits personnels</option>
-                            <option value="défis">Défis et solutions</option>
-                        </select>
                     </div>
 
                     <!-- Grille des témoignages -->
                     <div id="testimonialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Exemple de carte de témoignage -->
-                        <div class="bg-purple-900 bg-opacity-90 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2 backdrop-blur">
-                            <h3 class="text-xl font-bold mb-4">Mon premier Ramadan</h3>
-                            <p class="text-purple-200 mb-4">Une expérience enrichissante...</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-yellow-400">Spiritualité</span>
-                                <span class="text-purple-200 text-sm">Il y a 2 jours</span>
+                        @foreach ($temoignages as $temoig)
+                            <div class="bg-purple-800 rounded-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                                <img src="${testimonial.image}" alt="" class="w-full h-48 object-cover">
+                                <div class="p-6">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <h3 class="text-xl font-bold">{{ $temoig->titre }}</h3>
+                                        <span class="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full text-sm font-bold">
+                                            categorie
+                                        </span>
+                                    </div>
+                                    <p class="text-purple-200 mb-4">{{ Str::limit($temoig->description, 100, '....') }}</p>
+                                    <div class="flex justify-between items-center text-sm text-purple-200">
+                                        <div class="flex items-center">
+                                            <img src="/api/placeholder/32/32" alt="" class="w-8 h-8 rounded-full mr-2">
+                                            <span>{{ $temoig->first_name . ' ' .  $temoig->last_name}}</span>
+                                            <span>{{ $temoig->created_at }}</span>
+                                        </div>
+                                        <div class="flex space-x-4">
+                                            <button class="hover:text-yellow-400 transition-colors duration-300">
+                                                <i class="far fa-comment mr-1"></i>{{ $temoig->commentaires_count }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <!-- Pagination -->
