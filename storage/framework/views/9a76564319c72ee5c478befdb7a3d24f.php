@@ -8,8 +8,6 @@
 <?php $attributes = $attributes->except(\App\View\Components\Master::ignoredParameterNames()); ?>
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
-    <?php echo e(session('success')); ?>
-
     <!-- Page des témoignages -->
     <div class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen relative overflow-hidden">
         <!-- Éléments décoratifs (étoiles) -->
@@ -91,7 +89,7 @@
                                     <div class="pt-4">
                                         <a href="<?php echo e(route('temoignages.show', ['id' => $temoig->id])); ?>">
                                             <button class="hover:text-yellow-400 transition-colors duration-300">
-                                                <i class="far fa-info mr-1"></i>Détail →
+                                                <i class="fas fa-info-circle mr-1"></i>Détail →
                                             </button>
                                         </a>
                                     </div>

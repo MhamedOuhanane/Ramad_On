@@ -79,7 +79,7 @@
                                     <div class="pt-4">
                                         <a href="{{ route('temoignages.show', ['id' => $temoig->id]) }}">
                                             <button class="hover:text-yellow-400 transition-colors duration-300">
-                                                <i class="far fa-info mr-1"></i>Détail →
+                                                <i class="fas fa-info-circle mr-1"></i>Détail →
                                             </button>
                                         </a>
                                     </div>
