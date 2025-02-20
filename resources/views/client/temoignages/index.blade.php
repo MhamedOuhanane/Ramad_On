@@ -58,9 +58,6 @@
                                 <div class="p-6">
                                     <div class="flex justify-between items-start mb-4">
                                         <h3 class="text-xl font-bold">{{ $temoig->titre }}</h3>
-                                        <span class="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full text-sm font-bold">
-                                            categorie
-                                        </span>
                                     </div>
                                     <p class="text-purple-200 mb-4">{{ Str::limit($temoig->description, 40, '...') }}</p>
                                     <div class="flex justify-between items-center text-sm text-purple-200">

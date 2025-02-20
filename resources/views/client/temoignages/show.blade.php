@@ -59,51 +59,22 @@
 
                 <!-- Liste des commentaires -->
                 <div class="space-y-6">
-                    <!-- Commentaire 1 -->
-                    <div class="flex space-x-4">
-                        <div class="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center">
-                            <i class="fas fa-user text-purple-900"></i>
-                        </div>
-                        <div class="flex-1">
-                            <div class="bg-purple-800 p-4 rounded-lg">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-semibold text-yellow-400">Fatima K.</h4>
-                                    <span class="text-sm text-purple-200">Il y a 2 heures</span>
-                                </div>
-                                <p class="text-purple-200">Ma sha Allah, merci d'avoir partagé cette belle expérience !</p>
-                                <div class="mt-2 flex items-center space-x-4 text-sm text-purple-300">
-                                    <button class="hover:text-yellow-400 transition">
-                                        <i class="far fa-heart"></i>
-                                        <span>8</span>
-                                    </button>
-                                    <button class="hover:text-yellow-400 transition">Répondre</button>
+                    @foreach ($comments as $comment)
+                        <div class="flex space-x-4">
+                            <div class="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center">
+                                <i class="fas fa-user text-purple-900"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="bg-purple-800 p-4 rounded-lg">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-semibold text-yellow-400">{{ $comment->user->first_name .' '. $comment->user->last_name}}</h4>
+                                        <span class="text-sm text-purple-200">{{ $comment->titre }}</span>
+                                    </div>
+                                    <p class="text-purple-200">{{ $comment->commentaire }}</p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Commentaire 2 -->
-                    <div class="flex space-x-4">
-                        <div class="h-10 w-10 rounded-full bg-yellow-400 flex items-center justify-center">
-                            <i class="fas fa-user text-purple-900"></i>
-                        </div>
-                        <div class="flex-1">
-                            <div class="bg-purple-800 p-4 rounded-lg">
-                                <div class="flex justify-between items-start mb-2">
-                                    <h4 class="font-semibold text-yellow-400">Ahmed M.</h4>
-                                    <span class="text-sm text-purple-200">Il y a 3 heures</span>
-                                </div>
-                                <p class="text-purple-200">Très inspirant, qu'Allah accepte nos actes d'adoration.</p>
-                                <div class="mt-2 flex items-center space-x-4 text-sm text-purple-300">
-                                    <button class="hover:text-yellow-400 transition">
-                                        <i class="far fa-heart"></i>
-                                        <span>5</span>
-                                    </button>
-                                    <button class="hover:text-yellow-400 transition">Répondre</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
