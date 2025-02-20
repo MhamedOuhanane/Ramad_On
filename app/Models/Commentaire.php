@@ -15,12 +15,12 @@ class Commentaire extends Model
         'temoignage_id',
     ];
 
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Temoignages()
+    public function temoignage()
     {
         return $this->belongsTo(Temoignage::class);
     }

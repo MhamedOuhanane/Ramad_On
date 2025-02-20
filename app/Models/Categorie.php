@@ -13,7 +13,7 @@ class Categorie extends Model
         'name',
     ];
 
-    public function Recettes()
+    public function recette()
     {
         return $this->hasMany(Recette::class);
     }

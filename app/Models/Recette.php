@@ -18,12 +18,12 @@ class Recette extends Model
         'categorie_id',        
     ];    
     
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Categorie()
+    public function categorie()
     {
         return $this->belongsTo(Categorie::class);
     }

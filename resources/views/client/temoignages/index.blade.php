@@ -33,10 +33,12 @@
 
                     <!-- Filtres et recherche -->
                     <form action="{{ route('temoignages.search') }}" method="POST" class="flex flex-col md:flex-row gap-4 mb-8">
+                        @csrf
                         <div class="relative flex-1">
                             <input 
                                 type="text" 
                                 id="searchInput"
+                                value="{{ $searchTerm }}"
                                 name="SearchTemoi"
                                 placeholder="Rechercher dans les témoignages..." 
                                 class="w-full pl-10 pr-4 py-3 bg-purple-900 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
@@ -52,7 +54,7 @@
                         <!-- Exemple de carte de témoignage -->
                         @foreach ($temoignages as $temoig)
                             <div class="bg-purple-800 rounded-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <img src="${testimonial.image}" alt="" class="w-full h-48 object-cover">
+                                <img src="{{ asset('storage' . $temoig) }}" alt="" class="w-full h-48 object-cover">
                                 <div class="p-6">
                                     <div class="flex justify-between items-start mb-4">
                                         <h3 class="text-xl font-bold">{{ $temoig->titre }}</h3>
@@ -60,18 +62,29 @@
                                             categorie
                                         </span>
                                     </div>
-                                    <p class="text-purple-200 mb-4">{{ Str::limit($temoig->description, 100, '....') }}</p>
+                                    <p class="text-purple-200 mb-4">{{ Str::limit($temoig->description, 40, '...') }}</p>
                                     <div class="flex justify-between items-center text-sm text-purple-200">
                                         <div class="flex items-center">
-                                            <img src="/api/placeholder/32/32" alt="" class="w-8 h-8 rounded-full mr-2">
-                                            <span>{{ $temoig->first_name . ' ' .  $temoig->last_name}}</span>
-                                            <span>{{ $temoig->created_at }}</span>
+                                            <div class="h-12 w-12 mr-4 rounded-full bg-yellow-400 flex items-center justify-center">
+                                                <i class="fas fa-user text-purple-900"></i>
+                                            </div>
+                                            <div>
+                                                <p>{{ $temoig->user->first_name . ' ' .  $temoig->user->last_name}}</p>
+                                                <p>{{ $temoig->created_at }}</p>
+                                            </div>
                                         </div>
                                         <div class="flex space-x-4">
                                             <button class="hover:text-yellow-400 transition-colors duration-300">
-                                                <i class="far fa-comment mr-1"></i>{{ $temoig->commentaires_count }}
+                                                <i class="far fa-comment mr-1"></i>{{ $temoig->commentaire_count }}
                                             </button>
                                         </div>
+                                    </div>
+                                    <div class="pt-4">
+                                        <a href="{{ route('temoignages.show', ['id' => $temoig->id]) }}">
+                                            <button class="hover:text-yellow-400 transition-colors duration-300">
+                                                <i class="far fa-info mr-1"></i>Détail
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -150,111 +163,6 @@
     </div>
 
     <script>
-        // Données des témoignages
-        const testimonials = [
-            {
-                id: 1,
-                title: "Mon premier Ramadan",
-                author: "Sarah M.",
-                category: "spiritualité",
-                content: "Ce Ramadan a été une expérience transformatrice pour moi. J'ai découvert une paix intérieure que je ne connaissais pas auparavant. Le jeûne m'a appris la patience et la gratitude.",
-                date: "2025-03-15",
-                likes: 24,
-                comments: 8,
-                image: "/api/placeholder/400/300"
-            },
-            {
-                id: 2,
-                title: "Jeûner en famille",
-                author: "Ahmed K.",
-                category: "communauté",
-                content: "Le Ramadan est toujours plus spécial en famille. Partager l'iftar tous ensemble chaque soir crée des moments inoubliables et renforce nos liens.",
-                date: "2025-03-14",
-                likes: 36,
-                comments: 12,
-                image: "/api/placeholder/400/300"
-            },
-            {
-                id: 3,
-                title: "Surmonter les défis",
-                author: "Leila R.",
-                category: "défis",
-                content: "Entre le travail et le jeûne, ce n'était pas toujours facile. Mais j'ai trouvé des stratégies pour maintenir mon énergie et rester productive.",
-                date: "2025-03-13",
-                likes: 42,
-                comments: 15,
-                image: "/api/placeholder/400/300"
-            }
-        ];
-
-        // Variables de pagination
-        let currentPage = 1;
-        const itemsPerPage = 6;
-        let filteredTestimonials = [...testimonials];
-
-        // Fonction pour afficher les témoignages
-        function displayTestimonials() {
-            const grid = document.getElementById('testimonialsGrid');
-            const start = (currentPage - 1) * itemsPerPage;
-            const end = start + itemsPerPage;
-            const testimonialsToShow = filteredTestimonials.slice(start, end);
-
-            grid.innerHTML = testimonialsToShow.map(testimonial => `
-                <div class="bg-purple-800 rounded-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                    ${testimonial.image ? `
-                        <img src="${testimonial.image}" alt="" class="w-full h-48 object-cover">
-                    ` : ''}
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-xl font-bold">${testimonial.title}</h3>
-                            <span class="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full text-sm font-bold">
-                                ${testimonial.category}
-                            </span>
-                        </div>
-                        <p class="text-purple-200 mb-4">${testimonial.content}</p>
-                        <div class="flex justify-between items-center text-sm text-purple-200">
-                            <div class="flex items-center">
-                                <img src="/api/placeholder/32/32" alt="" class="w-8 h-8 rounded-full mr-2">
-                                <span>${testimonial.author}</span>
-                            </div>
-                            <div class="flex space-x-4">
-                                <button class="hover:text-yellow-400 transition-colors duration-300">
-                                    <i class="far fa-heart mr-1"></i>${testimonial.likes}
-                                </button>
-                                <button class="hover:text-yellow-400 transition-colors duration-300">
-                                    <i class="far fa-comment mr-1"></i>${testimonial.comments}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            updatePagination();
-        }
-
-        // Fonction pour mettre à jour la pagination
-        function updatePagination() {
-            const pageCount = Math.ceil(filteredTestimonials.length / itemsPerPage);
-            const pageNumbers = document.getElementById('pageNumbers');
-            
-            pageNumbers.innerHTML = '';
-            for (let i = 1; i <= pageCount; i++) {
-                const button = document.createElement('button');
-                button.className = `px-4 py-2 rounded-lg transition-colors duration-300 ${
-                    currentPage === i 
-                        ? 'bg-yellow-400 text-purple-900' 
-                        : 'bg-purple-800 hover:bg-purple-700'
-                }`;
-                button.textContent = i;
-                button.onclick = () => {
-                    currentPage = i;
-                    displayTestimonials();
-                };
-                pageNumbers.appendChild(button);
-            }
-        }
-
         // Gestionnaires du modal
         function openShareForm() {
             document.getElementById('shareModal').classList.remove('hidden');
@@ -263,34 +171,10 @@
         function closeShareForm() {
             document.getElementById('shareModal').classList.add('hidden');
         }
-
-        // Gestionnaires d'événements
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            filteredTestimonials = testimonials.filter(testimonial => 
-                testimonial.title.toLowerCase().includes(searchTerm) ||
-                testimonial.content.toLowerCase().includes(searchTerm)
-            );
-            currentPage = 1;
-            displayTestimonials();
-        });
-
-        document.getElementById('categoryFilter').addEventListener('change', (e) => {
-            const category = e.target.value;
-            filteredTestimonials = category === 'all' 
-                ? [...testimonials]
-                : testimonials.filter(testimonial => testimonial.category === category);
-            currentPage = 1;
-            displayTestimonials();
-        });
-
         document.getElementById('testimonialForm').addEventListener('submit', (e) => {
             e.preventDefault();
             // Ajoutez ici la logique pour sauvegarder le témoignage
             closeShareForm();
         });
-
-        // Affichage initial
-        displayTestimonials();
     </script>
 </x-master>

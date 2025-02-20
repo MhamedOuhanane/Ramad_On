@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Temoignage extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'titre',
         'description',
@@ -16,12 +16,12 @@ class Temoignage extends Model
         'user_id',
     ];    
     
-    public function User()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function Commentaires()
+    public function commentaire()
     {
         return $this->hasMany(Commentaire::class);
     }

@@ -24,17 +24,17 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function Recettes()
+    public function recette()
     {
         return $this->hasMany(Recette::class);
     }
 
-    public function Temoignages()
+    public function temoignage()
     {
         return $this->hasMany(Temoignage::class);
     }
 
-    public function Commentaires()
+    public function commentaire()
     {
         return $this->hasMany(Commentaire::class);
     }

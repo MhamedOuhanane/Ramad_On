@@ -9,37 +9,27 @@
                         <i class="fas fa-user text-purple-900"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-semibold text-yellow-400">Sarah Benali</h3>
-                        <p class="text-sm text-purple-200">Publié le 15 Mars 2025</p>
+                        <h3 class="text-lg font-semibold text-yellow-400">{{ $temoignage->user->first_name . ' ' .  $temoignage->user->last_name}}</h3>
+                        <p class="text-sm text-purple-200">Publié le {{ $temoignage->created_at }}</p>
                     </div>
                 </div>
             </div>
 
             <!-- Contenu du témoignage -->
             <div class="p-6">
-                <h1 class="text-2xl font-bold text-yellow-400 mb-4">Mon premier jour de Ramadan</h1>
+                <h1 class="text-2xl font-bold text-yellow-400 mb-4">{{ $temoignage->titre }}</h1>
                 <div class="mb-6">
                     <img src="/api/placeholder/800/400" alt="Image du témoignage" class="w-full rounded-lg mb-4">
                     <p class="text-purple-200 leading-relaxed">
-                        Alhamdulillah pour ce premier jour de Ramadan. J'ai ressenti une paix intérieure 
-                        particulière pendant la prière de Fajr. Le jeûne m'a permis de me recentrer sur 
-                        l'essentiel et de ressentir plus de gratitude...
+                        {{ $temoignage->description }}
                     </p>
                 </div>
 
                 <!-- Boutons d'interaction -->
                 <div class="flex items-center space-x-6 text-purple-200">
                     <button class="flex items-center space-x-2 hover:text-yellow-400 transition">
-                        <i class="far fa-heart"></i>
-                        <span>24 likes</span>
-                    </button>
-                    <button class="flex items-center space-x-2 hover:text-yellow-400 transition">
                         <i class="far fa-comment"></i>
-                        <span>12 commentaires</span>
-                    </button>
-                    <button class="flex items-center space-x-2 hover:text-yellow-400 transition">
-                        <i class="far fa-share-square"></i>
-                        <span>Partager</span>
+                        <span>{{ $comments->count() }} commentaires</span>
                     </button>
                 </div>
             </div>
