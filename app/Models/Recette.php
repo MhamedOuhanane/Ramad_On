@@ -13,7 +13,7 @@ class Recette extends Model
         'titre',
         'description',
         'photo',
-        'temps_prépare',
+        'temps_prepare',
         'user_id',
         'categorie_id',        
     ];    

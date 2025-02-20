@@ -1,5 +1,4 @@
 <x-master >
-    {{ session('success') }}
     <!-- Page des témoignages -->
     <div class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen relative overflow-hidden">
         <!-- Éléments décoratifs (étoiles) -->

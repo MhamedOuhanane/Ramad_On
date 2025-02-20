@@ -21,7 +21,7 @@
                     </div>
 
                     <!-- Bouton pour partager un témoignage -->
-                    <div class="flex justify-center flex-wrap gap-4 mb-12">
+                    <div class="flex justify-center flex-wrap gap-4 mb-12 text-[0.8rem]">
                         <a href="{{ route('recettes') }}">
                             <button class="border-2 {{ empty($categ) ? 'text-purple-900 bg-yellow-300' : 'border-2 border-yellow-400 text-yellow-500 hover:text-purple-900 hover:bg-yellow-300' }}   px-8 py-3 rounded-full font-bold transition-colors duration-300">
                                 Tous
@@ -51,32 +51,43 @@
                     <!-- Grille des recettes -->
                     <div id="recipesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Exemple de carte de recette -->
-                        <div class="bg-purple-900 bg-opacity-90 rounded-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2 backdrop-blur">
-                            <div class="relative h-48">
-                                <img src="/api/placeholder/400/320" alt="Recette" class="w-full h-full object-cover" />
-                                <div class="absolute top-2 right-2">
-                                    <span class="bg-yellow-400 text-purple-900 px-3 py-1 rounded-full text-sm font-bold">
-                                        Iftar
-                                    </span>
+                        @foreach ($recettes as $recette)
+                            <div class="bg-purple-900 bg-opacity-90 rounded-lg overflow-hidden transform transition-transform duration-300 hover:-translate-y-2 backdrop-blur">
+                                <div class="relative h-48">
+                                    <img src="{{ asset('storage/' . $recette->photo) }}" alt="Recette" class="w-full h-full object-cover" />
                                 </div>
-                            </div>
-                            <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2">Harira Marocaine</h3>
-                                <p class="text-purple-200 mb-4">Une délicieuse soupe traditionnelle pour l'iftar...</p>
-                                <div class="flex justify-between items-center">
-                                    <span class="text-yellow-400">Soupes</span>
-                                    <div class="flex items-center text-purple-200">
-                                        <i class="fas fa-clock mr-2"></i>
-                                        <span>45 min</span>
+                                <div class="p-6">
+                                    <div class="flex justify-between mb-3">
+                                        <h3 class="text-xl font-bold">{{ $recette->titre }}</h3>
+                                        <div class="text-purple-900 bg-yellow-300 px-4 py-1 rounded-full text-xs">
+                                            <p>{{ $recette->categorie->name }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-purple-200 mb-4">{{ $recette->description }}</p>
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex items-center text-xs">
+                                            <div class="h-10 w-10 mr-4 rounded-full bg-yellow-400 flex items-center justify-center">
+                                                <i class="fas fa-user text-purple-900"></i>
+                                            </div>
+                                            <div>
+                                                <p>{{ $recette->user->first_name . ' ' .  $recette->user->last_name}}</p>
+                                                <p>{{ $recette->created_at }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center text-purple-200">
+                                            <i class="fas fa-clock mr-2"></i>
+                                            <span>{{ $Carbon::createFromFormat('H:i:s', $recette->temps_prepare)->format('H\h i\m\i\n s\s') }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Formulaire d'ajout de recette -->
     <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="mb-12 bg-purple-900 bg-opacity-90 rounded-lg p-6 backdrop-blur">

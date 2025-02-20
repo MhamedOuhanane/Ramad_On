@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categorie;
 use App\Models\Recette;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,9 +12,11 @@ class RecetteController extends Controller
 {
     public function index()
     {  
-        $recettes = Recette::with('categorie');
+        $recettes = Recette::with('user')->with('categorie')->get();
         $categories = Categorie::all();
-        return view('client.recettes.index', compact('categories', 'recettes'));
+
+        $Carbon = new Carbon();
+        return view('client.recettes.index', compact('categories', 'recettes', 'Carbon'));
     }
 
     public function filter($id)
@@ -22,7 +25,8 @@ class RecetteController extends Controller
         $categ = Categorie::find($id)->name ?? '';
         $categories = Categorie::all();
         
-        return view('client.recettes.index', compact('categories', 'recettes', 'categ'));
+        $Carbon = new Carbon();
+        return view('client.recettes.index', compact('categories', 'recettes', 'categ', 'Carbon'));
     }
 
     public function store(Request $request)
