@@ -70,7 +70,7 @@
                                 <div class="bg-purple-800 p-4 rounded-lg">
                                     <div class="flex justify-between items-start mb-2">
                                         <h4 class="font-semibold text-yellow-400">{{ $comment->user->first_name .' '. $comment->user->last_name}}</h4>
-                                        <span class="text-sm text-purple-200">{{ $comment->titre }}</span>
+                                        <span class="text-sm text-purple-200">{{ $comment->created_at }}</span>
                                     </div>
                                     <p class="text-purple-200">{{ $comment->commentaire }}</p>
                                 </div>

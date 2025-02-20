@@ -7,6 +7,8 @@ use App\Models\Commentaire;
 use App\Models\Recette;
 use App\Models\Temoignage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class TemoignageController extends Controller
 {
@@ -40,5 +42,30 @@ class TemoignageController extends Controller
         $temoignage = Temoignage::with('user')->find($id);
         $comments = Commentaire::with('user')->where('temoignage_id' , $id)->get();
         return view('client.temoignages.show', compact('temoignage', 'comments'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'required|string|min:50',
+            // 'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        $Temoignage = new Temoignage();
+        $Temoignage->user_id = Auth::id();
+        $Temoignage->titre = $request->titre;
+        $Temoignage->description = $request->description;
+
+        if ($request->has('image')) {
+            $photoPath = $request->file('image')->store('photos', 'public');
+            $Temoignage->photo = $photoPath;
+            dd($Temoignage->photo);
+        } else {
+            $Temoignage->photo =  'defaultTem.png';
+        }
+        dd($Temoignage->photo);
+        $Temoignage->save();
+
+        return redirect()->route('temoignages')->with('success','temoignages Ajouter avec success');
     }
 }

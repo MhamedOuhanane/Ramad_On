@@ -1,4 +1,5 @@
 <x-master >
+    {{ session('success') }}
     <!-- Page des témoignages -->
     <div class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen relative overflow-hidden">
         <!-- Éléments décoratifs (étoiles) -->
@@ -54,7 +55,7 @@
                         <!-- Exemple de carte de témoignage -->
                         @foreach ($temoignages as $temoig)
                             <div class="bg-purple-800 rounded-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                                <img src="{{ asset('storage' . $temoig) }}" alt="" class="w-full h-48 object-cover">
+                                <img src="{{ asset('storage/' . $temoig->photo) }}" alt="" class="w-full h-48 object-cover">
                                 <div class="p-6">
                                     <div class="flex justify-between items-start mb-4">
                                         <h3 class="text-xl font-bold">{{ $temoig->titre }}</h3>
@@ -79,7 +80,7 @@
                                     <div class="pt-4">
                                         <a href="{{ route('temoignages.show', ['id' => $temoig->id]) }}">
                                             <button class="hover:text-yellow-400 transition-colors duration-300">
-                                                <i class="far fa-info mr-1"></i>Détail
+                                                <i class="far fa-info mr-1"></i>Détail →
                                             </button>
                                         </a>
                                     </div>
@@ -100,33 +101,24 @@
         <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
             <div class="bg-purple-900 bg-opacity-95 backdrop-blur rounded-lg p-8 max-w-2xl w-full mx-4">
                 <h2 class="text-2xl font-bold mb-6">Partager mon témoignage</h2>
-                <form id="testimonialForm" class="space-y-6">
+                <form id="testimonialForm" action="{{ route('temoignages.store') }}" method="POST" class="space-y-6">
+                    @csrf
                     <div>
                         <label class="block text-sm font-medium mb-2">Titre</label>
                         <input 
                             type="text" 
                             required
+                            name="titre"
                             class="w-full pl-4 pr-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
                             placeholder="Donnez un titre à votre témoignage"
                         >
                     </div>
                     <div>
-                        <label class="block text-sm font-medium mb-2">Catégorie</label>
-                        <select 
-                            required
-                            class="w-full px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
-                        >
-                            <option value="spiritualité">Spiritualité</option>
-                            <option value="communauté">Vie communautaire</option>
-                            <option value="bienfaits">Bienfaits personnels</option>
-                            <option value="défis">Défis et solutions</option>
-                        </select>
-                    </div>
-                    <div>
                         <label class="block text-sm font-medium mb-2">Votre témoignage</label>
                         <textarea 
                             required
-                            rows="6"
+                            name="description"
+                            rows="2"
                             class="w-full px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
                             placeholder="Partagez votre expérience..."
                         ></textarea>
@@ -136,6 +128,7 @@
                         <input 
                             type="file" 
                             accept="image/*"
+                            name="image"
                             class="w-full text-sm text-purple-200 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-800 file:text-purple-200 hover:file:bg-purple-700 transition-all duration-300"
                         >
                     </div>
@@ -168,10 +161,5 @@
         function closeShareForm() {
             document.getElementById('shareModal').classList.add('hidden');
         }
-        document.getElementById('testimonialForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Ajoutez ici la logique pour sauvegarder le témoignage
-            closeShareForm();
-        });
     </script>
 </x-master>

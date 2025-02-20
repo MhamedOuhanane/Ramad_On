@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/recettes', [RecetteController::class, 'index'])->name('recettes');
 
     Route::get('/temoignages', [TemoignageController::class, 'index'])->name('temoignages');
+    Route::post('/temoignages', [TemoignageController::class, 'store'])->name('temoignages.store');
     Route::post('/temoignages/search', [TemoignageController::class, 'search'])->name('temoignages.search');
     Route::get('/temoignages/{id}', [TemoignageController::class, 'show'])->name('temoignages.show');
 
