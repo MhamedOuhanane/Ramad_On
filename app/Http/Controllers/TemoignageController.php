@@ -56,14 +56,13 @@ class TemoignageController extends Controller
         $Temoignage->titre = $request->titre;
         $Temoignage->description = $request->description;
 
-        if ($request->has('image')) {
+        if ($request->hasFile('image')) {
+            
             $photoPath = $request->file('image')->store('photos', 'public');
             $Temoignage->photo = $photoPath;
-            dd($Temoignage->photo);
         } else {
-            $Temoignage->photo =  'defaultTem.png';
+            $Temoignage->photo =  'photos/defaultTem.png';
         }
-        dd($Temoignage->photo);
         $Temoignage->save();
 
         return redirect()->route('temoignages')->with('success','temoignages Ajouter avec success');

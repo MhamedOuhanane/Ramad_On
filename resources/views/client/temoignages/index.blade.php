@@ -101,7 +101,7 @@
         <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
             <div class="bg-purple-900 bg-opacity-95 backdrop-blur rounded-lg p-8 max-w-2xl w-full mx-4">
                 <h2 class="text-2xl font-bold mb-6">Partager mon témoignage</h2>
-                <form id="testimonialForm" action="{{ route('temoignages.store') }}" method="POST" class="space-y-6">
+                <form id="testimonialForm" action="{{ route('temoignages.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     <div>
                         <label class="block text-sm font-medium mb-2">Titre</label>
