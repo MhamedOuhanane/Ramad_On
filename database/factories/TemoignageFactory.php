@@ -20,7 +20,7 @@ class TemoignageFactory extends Factory
         return [
             'titre' => $this->faker->sentence, 
             'description' => $this->faker->paragraph, 
-            'photo' => 'default.jpg', 
+            'photo' => 'defaultTem.jpg', 
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
         ];
     }

@@ -29,7 +29,6 @@ class TemoignageController extends Controller
 
         if ($searchTerm) {
             $temoignages = $temoignages->where('titre', 'ILIKE', "%{$searchTerm}%");
-                // ->orWhere('first_name', 'ILIKE', "%{$searchTerm}%")
         }
 
         $temoignages = $temoignages->paginate(6); 
@@ -49,7 +48,7 @@ class TemoignageController extends Controller
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string|min:50',
-            // 'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $Temoignage = new Temoignage();
         $Temoignage->user_id = Auth::id();

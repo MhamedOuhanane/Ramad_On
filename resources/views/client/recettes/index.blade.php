@@ -19,14 +19,26 @@
                             Découvrez une sélection de délicieuses recettes pour le Suhoor et l'Iftar
                         </p>
                     </div>
+
+                    <!-- Bouton pour partager un témoignage -->
+                    <div class="flex justify-center mb-12">
+                        @foreach ($categories as $categorie)
+                            <a href="{{ route() }}">
+                                <button class="bg-yellow-400 text-purple-900 px-8 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors duration-300">
+                                    
+                                </button>
+                            </a>
+                        @endforeach
+                    </div>
     
-                    <!-- Barre de recherche et filtres -->
-                    <form class="flex flex-col md:flex-row gap-4 mb-8">
+                    <!-- Barre de recherche et filtres --> 
+                    <form action="{{ route('recettes.post') }}" method="POST" class="flex flex-col md:flex-row gap-4 mb-8">
                         @csrf
                         <div class="relative flex-1">
                             <input 
                                 type="text" 
                                 id="searchInput"
+                                name="search"
                                 placeholder="Rechercher une recette..." 
                                 class="w-full pl-10 pr-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
                             >
@@ -35,16 +47,12 @@
                             </span>
                         </div>
                         <div class="flex gap-4">
-                            <select 
-                                id="categoryFilter"
-                                name="category"
-                                class="px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
+                            <button 
+                                onclick="openShareForm()"
+                                class="bg-yellow-400 text-purple-900 px-8 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors duration-300"
                             >
-                                <option value="">Toutes les catégories</option>
-                                @foreach ($categories as $categorie)
-                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
-                                @endforeach
-                            </select>
+                                <i class="fas fa-plus mr-2"></i>Partager mon Recettes
+                            </button>
                         </div>
                     </form>
     
@@ -93,8 +101,107 @@
             </div>
         </div>
     </div>
+    <!-- Formulaire d'ajout de recette -->
+    <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="mb-12 bg-purple-900 bg-opacity-90 rounded-lg p-6 backdrop-blur my-12">
+            <h2 class="text-2xl font-bold mb-6">Ajouter une nouvelle recette</h2>
+            <form action="{{ route('recettes.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="titre" class="block text-sm font-medium mb-2">Titre de la recette</label>
+                            <input 
+                                type="text" 
+                                id="titre" 
+                                name="titre" 
+                                required
+                                class="w-full px-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                            >
+                        </div>
+
+                        <div>
+                            <label for="description" class="block text-sm font-medium mb-2">Description</label>
+                            <textarea 
+                                id="description" 
+                                name="description" 
+                                rows="4" 
+                                required
+                                class="w-full px-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label for="temps_prepare" class="block text-sm font-medium mb-2">Temps de préparation (minutes)</label>
+                            <input 
+                                type="number" 
+                                id="temps_prepare" 
+                                name="temps_prepare" 
+                                required
+                                class="w-full px-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                                placeholder="en min"
+                            >
+                        </div>
+
+                        <div>
+                            <label for="categorie" class="block text-sm font-medium mb-2">Catégorie</label>
+                            <select 
+                                id="categorie" 
+                                name="categorie" 
+                                required
+                                class="w-full px-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                            >
+                                <option value="">Sélectionner une catégorie</option>
+                                @foreach ($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="photo" class="block text-sm font-medium mb-2">Photo de la recette</label>
+                            <input 
+                                type="file" 
+                                id="photo" 
+                                name="photo" 
+                                accept="image/*"
+                                required
+                                class="w-full px-4 py-3 bg-purple-800 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none"
+                            >
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-4">
+                    <button 
+                        type="button"
+                        onclick="closeShareForm()"
+                        class="px-6 py-2 rounded-lg border-2 border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-purple-900 transition-all duration-300"
+                    >
+                        Annuler
+                    </button>
+                    <button 
+                        type="submit"
+                        class="px-6 py-2 bg-yellow-400 text-purple-900 rounded-lg hover:bg-yellow-300 transition-colors duration-300"
+                    >
+                        Publier
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
+         // Gestionnaires du modal
+         function openShareForm() {
+            document.getElementById('shareModal').classList.remove('hidden');
+        }
+
+        function closeShareForm() {
+            document.getElementById('shareModal').classList.add('hidden');
+        }
 
             grid.innerHTML = recipesToShow.map(recipe => `
                 <div class="bg-purple-800 rounded-lg overflow-hidden hover:shadow-lg transition duration-300">
