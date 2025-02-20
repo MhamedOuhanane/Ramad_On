@@ -11,17 +11,17 @@ class TemoignageController extends Controller
 {
     public function index(Request $request)
     {
-        $temoignages = Temoignage::with('user')->withCount('Commentaires')->get();
+        $temoignages = Temoignage::with('user')->withCount('Commentaires');
         
-        // if ($request->has('search') && $request->search != '') {
+        // if ($request->has('SearchTemoi') && $request->search != '') {
         //     $searchTerm = $request->search;
 
         //     $temoignages->where(function($query) use ($searchTerm){
-        //         $query->where('titre' , 'Ilike', )
+        //         $query->where('titre' , 'Ilike', "%".$searchTerm."%");
         //     });
         // }
-
-
+        
+        $temoignages =$temoignages->paginate(6);
         return view('client.temoignages.index', compact('temoignages'));
     }
 

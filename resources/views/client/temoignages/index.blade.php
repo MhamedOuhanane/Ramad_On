@@ -32,11 +32,12 @@
                     </div>
 
                     <!-- Filtres et recherche -->
-                    <div class="flex flex-col md:flex-row gap-4 mb-8">
+                    <form action="{{ route('temoignages.search') }}" method="POST" class="flex flex-col md:flex-row gap-4 mb-8">
                         <div class="relative flex-1">
                             <input 
                                 type="text" 
                                 id="searchInput"
+                                name="SearchTemoi"
                                 placeholder="Rechercher dans les témoignages..." 
                                 class="w-full pl-10 pr-4 py-3 bg-purple-900 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
                             >
@@ -44,7 +45,7 @@
                                 <i class="fas fa-search text-purple-400"></i>
                             </span>
                         </div>
-                    </div>
+                    </form>
 
                     <!-- Grille des témoignages -->
                     <div id="testimonialsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -78,16 +79,8 @@
                     </div>
 
                     <!-- Pagination -->
-                    <div class="flex justify-center mt-12 space-x-2">
-                        <button id="prevPage" class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <div id="pageNumbers" class="flex space-x-2">
-                            <!-- Les numéros de page seront injectés ici -->
-                        </div>
-                        <button id="nextPage" class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
+                    <div class="flex justify-center mt-12 space-x-2 ">
+                        {{ $temoignages->links() }}
                     </div>
                 </div>
             </div>
