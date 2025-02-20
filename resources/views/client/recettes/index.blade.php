@@ -21,40 +21,32 @@
                     </div>
 
                     <!-- Bouton pour partager un témoignage -->
-                    <div class="flex justify-center mb-12">
+                    <div class="flex justify-center flex-wrap gap-4 mb-12">
+                        <a href="{{ route('recettes') }}">
+                            <button class="border-2 {{ empty($categ) ? 'text-purple-900 bg-yellow-300' : 'border-2 border-yellow-400 text-yellow-500 hover:text-purple-900 hover:bg-yellow-300' }}   px-8 py-3 rounded-full font-bold transition-colors duration-300">
+                                Tous
+                            </button>
+                        </a>
                         @foreach ($categories as $categorie)
-                            <a href="{{ route() }}">
-                                <button class="bg-yellow-400 text-purple-900 px-8 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors duration-300">
-                                    
+                            <a href="{{ route('recettes.filter', ['id' => $categorie->id]) }}">
+                                <button class="{{ (isset($categ) && $categ == $categorie->name)? 'text-purple-900 bg-yellow-300' : 'border-2 border-yellow-400 text-yellow-500 hover:text-purple-900 hover:bg-yellow-300' }} px-8 py-3 rounded-full font-bold transition-colors duration-300">
+                                    {{ $categorie->name }}
                                 </button>
                             </a>
                         @endforeach
                     </div>
     
                     <!-- Barre de recherche et filtres --> 
-                    <form action="{{ route('recettes.post') }}" method="POST" class="flex flex-col md:flex-row gap-4 mb-8">
-                        @csrf
-                        <div class="relative flex-1">
-                            <input 
-                                type="text" 
-                                id="searchInput"
-                                name="search"
-                                placeholder="Rechercher une recette..." 
-                                class="w-full pl-10 pr-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
-                            >
-                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                                <i class="fas fa-search text-purple-400"></i>
-                            </span>
-                        </div>
+                    <div  class="flex justify-end mb-8">
                         <div class="flex gap-4">
                             <button 
                                 onclick="openShareForm()"
-                                class="bg-yellow-400 text-purple-900 px-8 py-3 rounded-full font-bold hover:bg-yellow-300 transition-colors duration-300"
+                                class="bg-purple-400  text-purple-900 px-8 py-3 rounded-lg font-bold hover:bg-purple-500 transition-colors duration-300"
                             >
                                 <i class="fas fa-plus mr-2"></i>Partager mon Recettes
                             </button>
                         </div>
-                    </form>
+                    </div>
     
                     <!-- Grille des recettes -->
                     <div id="recipesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -81,29 +73,13 @@
                             </div>
                         </div>
                     </div>
-    
-                    <!-- Pagination -->
-                    <div class="flex justify-center mt-12 space-x-2">
-                        <button id="prevPage" class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <div id="pageNumbers" class="flex space-x-2">
-                            <!-- Les numéros de page seront injectés ici -->
-                            <button class="px-4 py-2 bg-yellow-400 text-purple-900 rounded-lg font-bold">1</button>
-                            <button class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">2</button>
-                            <button class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">3</button>
-                        </div>
-                        <button id="nextPage" class="px-4 py-2 bg-purple-900 bg-opacity-90 rounded-lg hover:bg-purple-800 transition-colors duration-300">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Formulaire d'ajout de recette -->
     <div id="shareModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
-        <div class="mb-12 bg-purple-900 bg-opacity-90 rounded-lg p-6 backdrop-blur my-12">
+        <div class="mb-12 bg-purple-900 bg-opacity-90 rounded-lg p-6 backdrop-blur">
             <h2 class="text-2xl font-bold mb-6">Ajouter une nouvelle recette</h2>
             <form action="{{ route('recettes.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                 @csrf
@@ -136,7 +112,7 @@
                         <div>
                             <label for="temps_prepare" class="block text-sm font-medium mb-2">Temps de préparation (minutes)</label>
                             <input 
-                                type="number" 
+                                type="time" 
                                 id="temps_prepare" 
                                 name="temps_prepare" 
                                 required

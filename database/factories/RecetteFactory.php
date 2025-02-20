@@ -22,7 +22,7 @@ class RecetteFactory extends Factory
             'titre' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'photo' => "defaultTem.png",
-            'temps_prépare' => $this->faker->time,
+            'temps_prepare' => $this->faker->time,
             'user_id' => $this->faker->randomElement(User::pluck('id')->toArray()),
             'categorie_id' => $this->faker->randomElement(Categorie::pluck('id')->toArray()), 
         ];

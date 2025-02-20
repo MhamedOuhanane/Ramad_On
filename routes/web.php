@@ -13,7 +13,7 @@ Route::middleware('guest')->group(function() {
     Route::get('/login', [LoginController::class, 'create'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 
-    // Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 });
  
@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/recettes', [RecetteController::class, 'index'])->name('recettes');
     Route::post('/recettes/store', [RecetteController::class, 'store'])->name('recettes.store');
-    Route::post('/recettes', [RecetteController::class, 'index'])->name('recettes.post');
+    Route::get('/recettes/filter/{id}', [RecetteController::class, 'filter'])->name('recettes.filter');
 
     Route::get('/temoignages', [TemoignageController::class, 'index'])->name('temoignages');
     Route::post('/temoignages', [TemoignageController::class, 'store'])->name('temoignages.store');

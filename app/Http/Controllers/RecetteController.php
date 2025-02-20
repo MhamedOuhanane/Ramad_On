@@ -10,9 +10,19 @@ use Illuminate\Support\Facades\Auth;
 class RecetteController extends Controller
 {
     public function index()
-    {
+    {  
+        $recettes = Recette::with('categorie');
         $categories = Categorie::all();
-        return view('client.recettes.index', compact('categories'));
+        return view('client.recettes.index', compact('categories', 'recettes'));
+    }
+
+    public function filter($id)
+    {
+        $recettes = Recette::with('categorie')->find($id);
+        $categ = Categorie::find($id)->name ?? '';
+        $categories = Categorie::all();
+        
+        return view('client.recettes.index', compact('categories', 'recettes', 'categ'));
     }
 
     public function store(Request $request)
