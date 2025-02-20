@@ -21,7 +21,7 @@ class RecetteController extends Controller
 
     public function filter($id)
     {
-        $recettes = Recette::with('categorie')->find($id);
+        $recettes = Recette::with('user')->with('categorie')->where('categorie_id','=', $id)->get();
         $categ = Categorie::find($id)->name ?? '';
         $categories = Categorie::all();
         
