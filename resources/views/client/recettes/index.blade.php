@@ -21,7 +21,8 @@
                     </div>
     
                     <!-- Barre de recherche et filtres -->
-                    <div class="flex flex-col md:flex-row gap-4 mb-8">
+                    <form class="flex flex-col md:flex-row gap-4 mb-8">
+                        @csrf
                         <div class="relative flex-1">
                             <input 
                                 type="text" 
@@ -36,25 +37,16 @@
                         <div class="flex gap-4">
                             <select 
                                 id="categoryFilter"
+                                name="category"
                                 class="px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
                             >
-                                <option value="all">Toutes les catégories</option>
-                                <option value="entrée">Entrées</option>
-                                <option value="soupe">Soupes</option>
-                                <option value="plat">Plats principaux</option>
-                                <option value="dessert">Desserts</option>
-                                <option value="boisson">Boissons</option>
-                            </select>
-                            <select 
-                                id="mealFilter"
-                                class="px-4 py-3 bg-purple-800 bg-opacity-90 rounded-lg focus:ring-2 focus:ring-yellow-400 focus:outline-none transition-all duration-300"
-                            >
-                                <option value="all">Tous les repas</option>
-                                <option value="suhoor">Suhoor</option>
-                                <option value="iftar">Iftar</option>
+                                <option value="">Toutes les catégories</option>
+                                @foreach ($categories as $categorie)
+                                    <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-                    </div>
+                    </form>
     
                     <!-- Grille des recettes -->
                     <div id="recipesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -103,49 +95,6 @@
     </div>
 
     <script>
-        // Données des recettes (à remplacer par des données dynamiques)
-        const recipes = [
-            {
-                id: 1,
-                title: 'Harira Traditionnelle',
-                category: 'soupe',
-                image: '/api/placeholder/400/300',
-                description: 'Soupe traditionnelle pour la rupture du jeûne',
-                time: '45 min',
-                difficulty: 'Moyenne'
-            },
-            {
-                id: 2,
-                title: 'Dates Farcies aux Amandes',
-                category: 'entrée',
-                image: '/api/placeholder/400/300',
-                description: 'Dattes fourrées aux amandes et au miel',
-                time: '20 min',
-                difficulty: 'Facile'
-            },
-            {
-                id: 3,
-                title: 'Tajine d\'Agneau',
-                category: 'plat',
-                image: '/api/placeholder/400/300',
-                description: 'Tajine aux pruneaux et amandes',
-                time: '2h',
-                difficulty: 'Difficile'
-            },
-            // ... Ajoutez plus de recettes ici
-        ];
-
-        // Variables de pagination
-        let currentPage = 1;
-        const recipesPerPage = 6;
-        let filteredRecipes = [...recipes];
-
-        // Fonction pour afficher les recettes
-        function displayRecipes() {
-            const grid = document.getElementById('recipesGrid');
-            const start = (currentPage - 1) * recipesPerPage;
-            const end = start + recipesPerPage;
-            const recipesToShow = filteredRecipes.slice(start, end);
 
             grid.innerHTML = recipesToShow.map(recipe => `
                 <div class="bg-purple-800 rounded-lg overflow-hidden hover:shadow-lg transition duration-300">
@@ -165,68 +114,5 @@
                     </div>
                 </div>
             `).join('');
-
-            updatePagination();
-        }
-
-        // Fonction pour mettre à jour la pagination
-        function updatePagination() {
-            const pageCount = Math.ceil(filteredRecipes.length / recipesPerPage);
-            const pageNumbers = document.getElementById('pageNumbers');
-            
-            pageNumbers.innerHTML = '';
-            for (let i = 1; i <= pageCount; i++) {
-                const button = document.createElement('button');
-                button.className = `px-4 py-2 rounded-lg ${currentPage === i ? 'bg-yellow-400 text-purple-900' : 'bg-purple-800 hover:bg-purple-700'}`;
-                button.textContent = i;
-                button.onclick = () => {
-                    currentPage = i;
-                    displayRecipes();
-                };
-                pageNumbers.appendChild(button);
-            }
-
-            // Mise à jour des boutons précédent/suivant
-            document.getElementById('prevPage').disabled = currentPage === 1;
-            document.getElementById('nextPage').disabled = currentPage === pageCount;
-        }
-
-        // Gestionnaires d'événements
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            filteredRecipes = recipes.filter(recipe => 
-                recipe.title.toLowerCase().includes(searchTerm) ||
-                recipe.description.toLowerCase().includes(searchTerm)
-            );
-            currentPage = 1;
-            displayRecipes();
-        });
-
-        document.getElementById('categoryFilter').addEventListener('change', (e) => {
-            const category = e.target.value;
-            filteredRecipes = category === 'all' 
-                ? [...recipes]
-                : recipes.filter(recipe => recipe.category === category);
-            currentPage = 1;
-            displayRecipes();
-        });
-
-        document.getElementById('prevPage').addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                displayRecipes();
-            }
-        });
-
-        document.getElementById('nextPage').addEventListener('click', () => {
-            const pageCount = Math.ceil(filteredRecipes.length / recipesPerPage);
-            if (currentPage < pageCount) {
-                currentPage++;
-                displayRecipes();
-            }
-        });
-
-        // Affichage initial
-        displayRecipes();
     </script>
 </x-master>
