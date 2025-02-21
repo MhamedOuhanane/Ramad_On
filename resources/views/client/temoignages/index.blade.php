@@ -1,4 +1,4 @@
-<x-master >
+<x-master page="Temoignages">
     <!-- Page des témoignages -->
     <div class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen relative overflow-hidden">
         <!-- Éléments décoratifs (étoiles) -->
@@ -76,12 +76,17 @@
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="pt-4">
+                                    <div class="flex justify-between pt-4">
                                         <a href="{{ route('temoignages.show', ['id' => $temoig->id]) }}">
                                             <button class="hover:text-yellow-400 transition-colors duration-300">
                                                 <i class="fas fa-info-circle mr-1"></i>Détail →
                                             </button>
                                         </a>
+                                        <form action="{{  }}">
+                                            <button class="hover:text-red-400 transition-colors duration-300">
+                                                <i class="fas fa-trash text-xl mr-1"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

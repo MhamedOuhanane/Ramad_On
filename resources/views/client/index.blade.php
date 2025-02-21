@@ -1,4 +1,4 @@
-<x-master >
+<x-master page="Home">
     <!-- Hero Section -->
     <section id="home" class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen flex items-center relative overflow-hidden">
         <!-- Stars and Moon -->
@@ -124,7 +124,7 @@
 
                 <!-- Popular Recipes Card -->
                 <div class="bg-purple-900 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
-                    <h3 class="text-xl font-bold mb-6">Recettes Les Plus Populaires</h3>
+                    <h3 class="text-xl font-bold mb-6">Temoignages Les Plus Populaires</h3>
                     <div class="space-y-4">
                         @foreach ($TopTemoignage as $item)
                             <div class="bg-purple-800 p-4 rounded-lg flex items-center justify-between">

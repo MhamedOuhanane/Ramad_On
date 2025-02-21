@@ -1,4 +1,4 @@
-<x-master >
+<x-master page="Recette">
     <div class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen relative overflow-hidden">
         <!-- Éléments décoratifs (étoiles) -->
         <div class="absolute inset-0">

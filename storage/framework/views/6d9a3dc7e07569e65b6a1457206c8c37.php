@@ -133,7 +133,7 @@
 
                 <!-- Popular Recipes Card -->
                 <div class="bg-purple-900 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
-                    <h3 class="text-xl font-bold mb-6">Recettes Les Plus Populaires</h3>
+                    <h3 class="text-xl font-bold mb-6">Temoignages Les Plus Populaires</h3>
                     <div class="space-y-4">
                         <?php $__currentLoopData = $TopTemoignage; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="bg-purple-800 p-4 rounded-lg flex items-center justify-between">

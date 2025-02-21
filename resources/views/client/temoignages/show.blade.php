@@ -1,4 +1,4 @@
-<x-master >
+<x-master page="Temoignages">
     <!-- Contenu principal -->
     <div class="container mx-auto pt-24 pb-12">
         <div class="bg-purple-800 rounded-lg shadow-xl overflow-hidden text-white">
