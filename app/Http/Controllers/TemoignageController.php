@@ -66,4 +66,12 @@ class TemoignageController extends Controller
 
         return redirect()->route('temoignages')->with('success','temoignages Ajouter avec success');
     }
+
+    public function delete($id)
+    {
+        if (Auth::check()) {
+            Temoignage::destroy($id);
+        }
+        return redirect()->route('temoignages')->with('success', 'Le temoignage est supprime avec success');
+    }
 }

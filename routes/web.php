@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function() {
     Route::post('/temoignages', [TemoignageController::class, 'store'])->name('temoignages.store');
     Route::post('/temoignages/search', [TemoignageController::class, 'search'])->name('temoignages.search');
     Route::get('/temoignages/{id}', [TemoignageController::class, 'show'])->name('temoignages.show');
+    Route::get('/temoignages.delete/{id}', [TemoignageController::class, 'delete'])->name('temoignages.delete');
 
     Route::post('/temoignages/{id}', [CommentaireController::class, 'store'])->name('Commentaire');
 });

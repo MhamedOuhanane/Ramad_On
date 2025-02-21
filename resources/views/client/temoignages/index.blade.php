@@ -82,11 +82,14 @@
                                                 <i class="fas fa-info-circle mr-1"></i>Détail →
                                             </button>
                                         </a>
-                                        <form action="{{  }}">
-                                            <button class="hover:text-red-400 transition-colors duration-300">
-                                                <i class="fas fa-trash text-xl mr-1"></i>
-                                            </button>
-                                        </form>
+                                        @if (auth()->user()->id == $temoig->user->id)
+                                            <form action="{{ route('temoignages.delete', ['id' => $temoig->id]) }}">
+                                                @csrf
+                                                <button class="hover:text-red-400 transition-colors duration-300">
+                                                    <i class="fas fa-trash text-xl mr-1"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

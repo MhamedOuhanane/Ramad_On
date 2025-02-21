@@ -92,11 +92,14 @@
                                                 <i class="fas fa-info-circle mr-1"></i>Détail →
                                             </button>
                                         </a>
-                                        <form action="">
-                                            <button class="hover:text-red-400 transition-colors duration-300">
-                                                <i class="fas fa-trash text-xl mr-1"></i>
-                                            </button>
-                                        </form>
+                                        <?php if(auth()->user()->id == $temoig->user->id): ?>
+                                            <form action="<?php echo e(route('temoignages.delete', ['id' => $temoig->id])); ?>">
+                                                <?php echo csrf_field(); ?>
+                                                <button class="hover:text-red-400 transition-colors duration-300">
+                                                    <i class="fas fa-trash text-xl mr-1"></i>
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
