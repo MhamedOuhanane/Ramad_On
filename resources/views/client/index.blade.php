@@ -1,19 +1,4 @@
 <x-master >
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 bg-purple-900 z-40 hidden">
-        <div class="container mx-auto px-6 py-20">
-            <div class="flex flex-col space-y-6 text-center">
-                <a href="#home" class="text-xl hover:text-yellow-400 transition-colors duration-300">Accueil</a>
-                <a href="#horaires" class="text-xl hover:text-yellow-400 transition-colors duration-300">Horaires</a>
-                <a href="#ressources" class="text-xl hover:text-yellow-400 transition-colors duration-300">Ressources</a>
-                <a href="#communaute" class="text-xl hover:text-yellow-400 transition-colors duration-300">Communauté</a>
-                <button class="bg-yellow-400 text-purple-900 px-6 py-2 rounded-full font-bold hover:bg-yellow-300 transition-colors duration-300">
-                    Connexion
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <section id="home" class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen flex items-center relative overflow-hidden">
         <!-- Stars and Moon -->
@@ -117,32 +102,74 @@
         </div>
     </section>
 
+    <!-- Statistics and Popular Recipes Section -->
+    <section id="statistiques" class="py-20 bg-purple-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Statistiques et Recettes Populaires</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Statistics Card -->
+                <div class="bg-purple-900 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
+                    <h3 class="text-xl font-bold mb-6">Statistiques de la Communauté</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-purple-800 p-4 rounded-lg text-center">
+                            <span class="block text-yellow-400 text-3xl font-bold mb-2">{{ count($temoignages) }}</span>
+                            <span class="text-purple-200">Temoignages</span>
+                        </div>
+                        <div class="bg-purple-800 p-4 rounded-lg text-center">
+                            <span class="block text-yellow-400 text-3xl font-bold mb-2">{{ count($recettes) }}</span>
+                            <span class="text-purple-200">Recettes Partagées</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Popular Recipes Card -->
+                <div class="bg-purple-900 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
+                    <h3 class="text-xl font-bold mb-6">Recettes Les Plus Populaires</h3>
+                    <div class="space-y-4">
+                        @foreach ($TopTemoignage as $item)
+                            <div class="bg-purple-800 p-4 rounded-lg flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold">{{ $item->titre }}</h4>
+                                    <p class="text-purple-200 text-sm"><i class="fas fa-user text-purple-200 mr-1"></i>
+                                        {{ $item->user->first_name }} {{ $item->user->last_name }}</p>
+                                </div>
+                                <div class="text-yellow-400">
+                                    <span class="font-bold"><i class="far fa-comment mr-1"></i>{{ $item->commentaire_count }}</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Community Section -->
-    <section id="communaute" class="py-20 bg-purple-800">
+    <section id="communaute" class="py-20 bg-purple-900">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center">Notre Communauté</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-purple-900 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="bg-purple-800 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
                     <h3 class="text-xl font-bold mb-4">Forum de Discussion</h3>
                     <div class="space-y-4">
-                        <div class="p-4 bg-purple-800 rounded-lg">
+                        <div class="p-4 bg-purple-900 rounded-lg">
                             <h4 class="font-bold">Préparation du Suhoor</h4>
                             <p class="text-purple-200">Partagez vos astuces pour un Suhoor équilibré...</p>
                         </div>
-                        <div class="p-4 bg-purple-800 rounded-lg">
+                        <div class="p-4 bg-purple-900 rounded-lg">
                             <h4 class="font-bold">Gestion du Temps</h4>
                             <p class="text-purple-200">Comment organiser sa journée pendant le Ramadan...</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-purple-900 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
+                <div class="bg-purple-800 p-6 rounded-lg transform transition-transform duration-300 hover:-translate-y-2">
                     <h3 class="text-xl font-bold mb-4">Événements à Venir</h3>
                     <div class="space-y-4">
-                        <div class="p-4 bg-purple-800 rounded-lg">
+                        <div class="p-4 bg-purple-900 rounded-lg">
                             <h4 class="font-bold">Iftar Communautaire</h4>
                             <p class="text-purple-200">Rejoignez-nous pour un Iftar communautaire...</p>
                         </div>
-                        <div class="p-4 bg-purple-800 rounded-lg">
+                        <div class="p-4 bg-purple-900 rounded-lg">
                             <h4 class="font-bold">Nuit du Destin</h4>
                             <p class="text-purple-200">Programme spécial pour Laylat al-Qadr...</p>
                         </div>
