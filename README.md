@@ -15,7 +15,6 @@ Ramad'ON est une plateforme communautaire développée pour le Ramadan 2025, per
 - Partage de recettes avec images
 - Système de catégorisation (entrées, plats, desserts)
 - Filtrage avancé par catégorie
-- Fonction de recherche intégrée
 
 ### 💬 Interactions Communautaires
 - Système de commentaires
@@ -42,7 +41,7 @@ Ramad'ON est une plateforme communautaire développée pour le Ramadan 2025, per
 
 ## Livrables 📦
 
-### Date limite : 02/02/2024 à 23:59
+### Date limite : 21/02/2024 à 23:59
 
 ### Gestion de Projet
 - **Planification des tâches**: [Lien vers le projet Jira](https://mhamde.atlassian.net/jira/software/projects/RAM/boards/15?atlOrigin=eyJpIjoiZDkzMGY3MzNmZTcxNGZhNzllZTc0OTU4YTI0NGM5NmUiLCJwIjoiaiJ9)

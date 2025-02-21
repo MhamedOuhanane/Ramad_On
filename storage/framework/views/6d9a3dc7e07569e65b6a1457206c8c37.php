@@ -7,7 +7,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
 <?php $attributes = $attributes->except(\App\View\Components\Master::ignoredParameterNames()); ?>
 <?php endif; ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['page' => 'Home']); ?>
     <!-- Hero Section -->
     <section id="home" class="bg-gradient-to-b from-purple-800 to-purple-950 min-h-screen flex items-center relative overflow-hidden">
         <!-- Stars and Moon -->
@@ -40,10 +40,13 @@
                     <!-- Mosque Illustration -->
                     <div class="relative">
                         <div class="w-full h-64 bg-purple-800 rounded-t-full opacity-80"></div>
-                        <div class="absolute bottom-0 w-full">
+                        <div class="absolute bottom-0 w-full flex items-center flex-col">
+                            <img src="<?php echo e(asset('storage/photos/image.png')); ?>" alt="Backgroud de site" class="w-[50%]">
                             <div class="flex justify-center space-x-4">
                                 <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse"></div>
-                                <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse delay-150"></div>
+                                <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse delay-150">
+                                    
+                                </div>
                                 <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse delay-300"></div>
                             </div>
                         </div>

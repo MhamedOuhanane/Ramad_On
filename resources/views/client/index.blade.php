@@ -31,10 +31,13 @@
                     <!-- Mosque Illustration -->
                     <div class="relative">
                         <div class="w-full h-64 bg-purple-800 rounded-t-full opacity-80"></div>
-                        <div class="absolute bottom-0 w-full">
+                        <div class="absolute bottom-0 w-full flex items-center flex-col">
+                            <img src="{{ asset('storage/photos/image.png') }}" alt="Backgroud de site" class="w-[50%]">
                             <div class="flex justify-center space-x-4">
                                 <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse"></div>
-                                <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse delay-150"></div>
+                                <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse delay-150">
+                                    
+                                </div>
                                 <div class="w-8 h-12 bg-yellow-400 rounded-t-lg opacity-75 animate-pulse delay-300"></div>
                             </div>
                         </div>
